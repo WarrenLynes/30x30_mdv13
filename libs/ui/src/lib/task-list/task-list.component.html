@@ -1,0 +1,9 @@
+<mat-list>
+  <mat-list-item *ngFor="let task of tasks" (click)="selectTask(task)">
+    <h3 matLine> {{task.name}} </h3>
+    <p matLine>
+      <span> {{task.description}} </span>
+      <span class="demo-2"> -- {{task.id}} </span>
+    </p>
+  </mat-list-item>
+</mat-list>

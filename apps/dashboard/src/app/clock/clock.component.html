@@ -1,0 +1,13 @@
+<div class="container">
+
+  <div class="row">
+    <mdv13-task-form [task]="task$ | async" (saveTask)="createTask($event)"></mdv13-task-form>
+  </div>
+
+  <div class="row task-list">
+    <mdv13-task-list
+      [tasks]="tasks$ | async"
+      (selectt)="selectTask($event)"
+    ></mdv13-task-list>
+  </div>
+</div>
