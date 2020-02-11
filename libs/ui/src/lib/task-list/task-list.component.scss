@@ -6,8 +6,7 @@ mat-list-item.mat-list-item:hover { background: #252525; }
 }
 
 .mat-card {
-  min-width: 100%;
-  min-height: 20vh;
+  min-height: 100%;
   h1.boom {
     font-size: 11em;
   }
@@ -17,4 +16,3 @@ mat-list-item.mat-list-item:not(:first-of-type) {
   border: none!important;
   border-top: 1px solid #24292e!important;
 }
-

@@ -1,11 +1,24 @@
 .container {
+  justify-content: center;
   flex-flow: row;
   flex-wrap: wrap;
-  justify-content: center;
   height: 100%;
 }
 
 .row.task-list {
+  min-width: 250px;
+  height: 100%;
+}
+
+.row.task-form {
   flex: 1;
   height: 100%;
 }
+
+@media (max-width: 930px) {
+  .container {
+    flex-flow: column-reverse;
+    height: 100%;
+  }
+}
+

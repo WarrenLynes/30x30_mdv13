@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
-import { interval, Subject, Subscription } from 'rxjs';
-import { debounce, debounceTime, takeUntil } from 'rxjs/operators';
-import { Task } from '@mdv13/core-data';
+import { interval, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'mdv13-timer',
@@ -14,11 +13,15 @@ export class TimerComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() time: number;
   @Output() saveTime = new EventEmitter<number>();
+  @Output() updateTime = new EventEmitter();
 
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
+    if(changes.time && changes.time.currentValue) {
+      this.reset();
+    }
   }
 
   ngOnInit() {
@@ -33,6 +36,7 @@ export class TimerComponent implements OnInit, OnDestroy, OnChanges {
   totalSeconds() {
     return this.elapsed + this.time;
   }
+
   getSeconds() {
     const total = this.totalSeconds();
     const seconds = total - Math.floor(total / 60) * 60;
@@ -54,16 +58,18 @@ export class TimerComponent implements OnInit, OnDestroy, OnChanges {
       takeUntil(this.destroy$),
     ).subscribe((x) => {
       this.elapsed += 1;
+      this.updateTime.emit(this.elapsed + this.time);
     });
   }
 
   stopInterval() {
-    this.saveTime.emit(this.elapsed);
+    // this.saveTime.emit(this.elapsed);
     this.destroy$.next(true);
-    this.reset();
   }
 
   reset() {
     this.elapsed = 0;
+    this.destroy$.next(true);
   }
+
 }

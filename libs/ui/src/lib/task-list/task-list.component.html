@@ -1,9 +1,15 @@
-<mat-list>
-  <mat-list-item *ngFor="let task of tasks" (click)="selectTask(task)">
-    <h3 matLine> {{task.name}} </h3>
-    <p matLine>
-      <span> {{task.description}} </span>
-      <span class="demo-2"> -- {{task.id}} </span>
-    </p>
-  </mat-list-item>
-</mat-list>
+<mat-card>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngFor="let task of tasks" (click)="selectTask(task)">
+        <div style="flex-grow: 1;">
+          <h3 matLine> {{task.name}} </h3>
+          <p matLine>
+            <span> {{task.description}} </span>
+          </p>
+        </div>
+        <h4>{{task.time}}</h4>
+      </mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</mat-card>

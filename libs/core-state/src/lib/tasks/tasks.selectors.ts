@@ -5,6 +5,7 @@ import {
   tasksAdapter,
   TasksState
 } from './tasks.reducer';
+import { emptyTask } from '@mdv13/core-data';
 
 export const selectTasksState =
   createFeatureSelector<TasksState>(TASKS_FEATURE_KEY);
@@ -35,6 +36,6 @@ export const selectTask = createSelector(
   selectTasksEntities,
   selectTaskId,
   (entities, selectedId) => {
-    return selectedId ? entities[selectedId] : null
+    return selectedId ? entities[selectedId] : emptyTask
   }
 );

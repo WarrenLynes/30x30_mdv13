@@ -1,27 +1,40 @@
+<div class="task-form-container">
+  <div class="timer-container">
+    <h1 class="boom">{{hours}}:{{minutes}}:{{seconds}}</h1>
+    <div class="actions">
+      <button mat-stroked-button (click)="stopInterval()">
+        <mat-icon> pause_circle_outline</mat-icon>
+      </button>
+      <button mat-stroked-button (click)="reset()">
+        <mat-icon> refresh </mat-icon>
+      </button>
+      <button mat-stroked-button (click)="startInterval()">
+        <mat-icon> play_circle_outline</mat-icon>
+      </button>
+    </div>
+  </div>
 
 
-<mdv13-timer
-  [time]="time"
-  (saveTime)="updateTime($event)"
-></mdv13-timer>
+  <form (submit)="save()" [formGroup]="taskForm">
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Name" formControlName="name" type="text" name="name">
+      <mat-error *ngIf="taskForm.controls['name'].hasError('required')">Name is required</mat-error>
+      <mat-error *ngIf="taskForm.controls['name'].hasError('minLength')">Name must be 3 chars long</mat-error>
+      <mat-error *ngIf="taskForm.controls['name'].hasError('maxLength')">Name must be 10 chars or less</mat-error>
+    </mat-form-field>
 
-<form (submit)="save()" [formGroup]="taskForm">
-  <mat-form-field class="full-width">
-    <input matInput placeholder="Name" formControlName="name" type="text" name="name">
-    <mat-error *ngIf="taskForm.controls['name'].hasError('required')">Name is required</mat-error>
-    <mat-error *ngIf="taskForm.controls['name'].hasError('minLength')">Name must be 3 chars long</mat-error>
-    <mat-error *ngIf="taskForm.controls['name'].hasError('maxLength')">Name must be 10 chars or less</mat-error>
-  </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="description" formControlName="description" type="text" name="description">
+    </mat-form-field>
 
-  <mat-form-field class="full-width">
-    <input matInput placeholder="description" formControlName="description" type="text" name="description">
-  </mat-form-field>
+    <section class="full-width">
+      <h3>Estimate</h3>
+      <h4>{{taskForm.controls['estimate'].value}} minutes</h4>
+      <mat-slider class="full-width" min="0" max="60" thumbLabel name="estimate" formControlName="estimate"></mat-slider>
+    </section>
 
-  <section class="full-width">
-    <h3>Estimate</h3>
-    <h4>{{taskForm.controls['estimate'].value}} minutes</h4>
-    <mat-slider class="full-width" min="0" max="60" thumbLabel name="estimate" formControlName="estimate"></mat-slider>
-  </section>
+    <button type="submit" mat-button color="primary" [disabled]="taskForm.invalid || time <= 0"> save </button>
+    <button type="button" mat-button color="warn" *ngIf="task.id" (click)="deleteTask.emit(task)"> delete </button>
+  </form>
 
-  <button type="submit" mat-button color="primary" [disabled]="taskForm.invalid || time <= 0"> save </button>
-</form>
+</div>

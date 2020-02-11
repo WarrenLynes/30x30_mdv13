@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
+    "deploy": "ng build --prod && cp ./dist/apps/dashboard/index.html ./dist/apps/dashboard/200.html && surge ./dist/apps/dashboard/ https://shays3043013.surge.sh",
     "ng": "ng",
     "nx": "nx",
     "start": "ng serve",

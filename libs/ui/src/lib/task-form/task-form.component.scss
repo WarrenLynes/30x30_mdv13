@@ -1,0 +1,32 @@
+
+.timer-container {
+  background: #212121;
+  position: relative;
+  min-height: 150px;
+  display: flex;
+}
+
+.boom {
+  font-size: 10em;
+  text-align: center;
+  color: #080808;
+  margin: 10px auto;
+}
+
+.actions {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 930px) {
+  .boom {
+    font-size: 7em;
+  }
+}
+
+
+.task-form-container {
+  max-width: 725px;
+  margin: auto;
+}
+
